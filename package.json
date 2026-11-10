@@ -1,0 +1,15 @@
+{
+  "name": "flame-clerk",
+  "private": true,
+  "type": "module",
+  "description": "Scheduled clerk for a Qbit inscription collection",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@qbit-oss/pqc": "0.1.0",
+    "@qbit-oss/protocol": "0.1.0",
+    "@scure/bip32": "1.7.0",
+    "@scure/bip39": "1.6.0"
+  }
+}

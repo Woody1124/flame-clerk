@@ -1,0 +1,13 @@
+{
+  "PARENT": "5afe25a98ae18fee4732c2850ffa66f50baa94234cd1354c34deb0c1bc83824fi0",
+  "LIB": "9b323b4db20712790e847390a89cadbbe9dff2fa358c3f97a5a6fa5830c8f7e9i0",
+  "OWNER": "qb1zu5p57j4lvrtwd2mumgyc7plsvpfsw2jk0alfvk5stydhjj09exksrlkl44",
+  "PRICE": "500000000",
+  "CAP": "1024",
+  "START": "170005",
+  "END": "190165",
+  "RATE": "4",
+  "BATCH": "20",
+  "CONFS": "2",
+  "SWEEP": "1"
+}

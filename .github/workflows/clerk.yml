@@ -1,0 +1,25 @@
+name: clerk
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+concurrency:
+  group: clerk
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: One batch
+        run: node run.mjs --send
+        env:
+          QBIT_SEED: ${{ secrets.QBIT_SEED }}
