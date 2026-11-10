@@ -8,10 +8,11 @@ concurrency:
   cancel-in-progress: false
 permissions:
   contents: read
+  actions: write
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,7 +20,17 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: One batch
-        run: node run.mjs --send
+      - name: Loop (one batch every 4 minutes for about 5.5 hours)
+        run: |
+          end=$((SECONDS + 19800))
+          while [ $SECONDS -lt $end ]; do
+            node run.mjs --send || echo "clerk run failed (see the line above); trying again in 4 minutes"
+            sleep 240
+          done
         env:
           QBIT_SEED: ${{ secrets.QBIT_SEED }}
+      - name: Hand over to the next run (the cron schedule is only a backup, GitHub delays it)
+        if: always()
+        run: gh workflow run clerk.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
